@@ -1,6 +1,10 @@
+import CollaborativeRoom from "@/components/CollaborativeRoom";
+
 const Document = () => {
   return (
-    <div></div>
+    <main className="flex flex-col w-full items-center">
+      <CollaborativeRoom />
+    </main>
   );
 };
 
