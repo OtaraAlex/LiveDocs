@@ -14,9 +14,9 @@ import { updateDocument } from "@/lib/actions/room.actions";
 const CollaborativeRoom = ({
   roomId,
   roomMetadata,
+  users,
+  currentUserType,
 }: CollaborativeRoomProps) => {
-  const currentUserType = "editor";
-
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,9 @@ const CollaborativeRoom = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
 
-  const updateTitleHandler = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const updateTitleHandler = async (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     if (e.key === "Enter") {
       setLoading(true);
 
@@ -63,7 +65,7 @@ const CollaborativeRoom = ({
   }, [roomId, documentTitle]);
 
   useEffect(() => {
-    if(editing && inputRef.current) {
+    if (editing && inputRef.current) {
       inputRef.current.focus();
     }
   }, [editing]);
@@ -121,7 +123,7 @@ const CollaborativeRoom = ({
               </SignedIn>
             </div>
           </Header>
-          <Editor />
+          <Editor roomId={roomId} currentUserType={currentUserType} />
         </div>
       </ClientSideSuspense>
     </RoomProvider>
